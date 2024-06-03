@@ -96,4 +96,4 @@ Very Strong
 
 3. Make sure to aligne "main()" at the far left end.
 
-4. Run the program.
+4. Run the program..
